@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="GetterSetter">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/dist/GetterSetter.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
