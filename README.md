@@ -1,7 +1,7 @@
 # gettersetterbluejextension
 GetterSetter es a BlueJ 5.0 Extension. It generates code for getter/setter methods. See original version [here](1).
 
-Download JAR Extension at `out/artifacts/gettersetterbluejextendsion_jar/gettersetterbluejextension.jar`
+Download JAR Extension at *releases* section or at  `out/artifacts/gettersetterbluejextendsion_jar/gettersetterbluejextension.jar`
 
 ## Changes:
  - Changed getter/setter method description text.
