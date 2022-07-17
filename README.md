@@ -1,15 +1,14 @@
 # gettersetterbluejextension
-GetterSetter es a BlueJ 5.0 Extension. It generate code to get/set methods and generate GUI JavaFX to edit object on BlueJ using get/set methods
+GetterSetter es a BlueJ 5.0 Extension. It generates code for getter/setter methods. See original version [here](1).
 
-View video at doc/video. [Youtube Spanish Video](https://youtube.com/playlist?list=PLhy9REXgL_jZVYCOF5lkwQjOqvyVshI5v)
+Download JAR Extension at `out/artifacts/gettersetterbluejextendsion_jar/gettersetterbluejextension.jar`
 
-View screenshoot at doc/GetterSetter-ScreenShot.pdf
+## Changes:
+ - Changed getter/setter method description text.
+ - Added `@param` to setter method description.
+ - Added the ability to change the parameter suffix for setter methods in BlueJ preferences.
 
-View javadoc at doc/api-java-doc
+## Planned Changes:
+ - Add the ability to change the description text language.
 
-View source BlueJProject at src/BlueJProject-GetterSetterExtension
-
-Download JAR Extension at dist/
-GetterSetter.jar
-
-
+[1]: https://github.com/miljeveco/gettersetterbluejextension
