@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="gettersetterbluejextension:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/gettersetterbluejextension_jar</output-path>
+    <root id="archive" name="gettersetterbluejextension.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/src/BlueJProject-GetterSetterExtension/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="module-output" name="gettersetterbluejextension" />
+    </root>
+  </artifact>
+</component>

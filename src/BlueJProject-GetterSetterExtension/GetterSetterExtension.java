@@ -31,10 +31,13 @@ public class GetterSetterExtension extends Extension
     private BClass curClass;
     private BObject curObject;
 
+    private BlueJ bluej;
+
     /**
      * When this method is called, the extension may start its work.
      */
     public void startup (BlueJ bluej) {
+        this.bluej = bluej;
         MenuBuilder menuBuilder = new MenuBuilder(this);
         bluej.setMenuGenerator(menuBuilder);
         Preferences myPrefs = new Preferences(bluej);
@@ -134,7 +137,7 @@ public class GetterSetterExtension extends Extension
         CodeGenerator codeGenerator = null;
         String code ="";
         editorUtil = new EditorUtil(this.curClass);
-        codeGenerator = new CodeGenerator();
+        codeGenerator = new CodeGenerator(bluej);
         code = codeGenerator.generateGetterSetter(this.curClass.getJavaClass());
         editorUtil.appendText(code);
         curClass.compile(false);
@@ -148,7 +151,7 @@ public class GetterSetterExtension extends Extension
         CodeGenerator codeGenerator = null;
         String code ="";
         editorUtil = new EditorUtil(this.curClass);
-        codeGenerator = new CodeGenerator();
+        codeGenerator = new CodeGenerator(bluej);
         code = codeGenerator.generateGetter(this.curClass.getJavaClass(), propertie);
         editorUtil.appendText(code);
         curClass.compile(false);
@@ -162,7 +165,7 @@ public class GetterSetterExtension extends Extension
         CodeGenerator codeGenerator = null;
         String code ="";
         editorUtil = new EditorUtil(this.curClass);
-        codeGenerator = new CodeGenerator();
+        codeGenerator = new CodeGenerator(bluej);
         code = codeGenerator.generateSetter(this.curClass.getJavaClass(), propertie);
         editorUtil.appendText(code);
         curClass.compile(false);

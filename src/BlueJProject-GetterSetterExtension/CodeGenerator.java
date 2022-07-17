@@ -1,5 +1,6 @@
 import java.lang.reflect.*;
 
+import bluej.extensions2.BlueJ;
 import javafx.scene.control.Alert;
 import javafx.stage.StageStyle;
 import javafx.scene.control.ButtonType;
@@ -15,9 +16,15 @@ import javafx.stage.Modality;
  */
 public class CodeGenerator
 {
+    private BlueJ bluej;
+
     /**Default Constructor*/
     public CodeGenerator()
     {
+    }
+
+    public CodeGenerator(BlueJ bluej) {
+        this.bluej = bluej;
     }
 
     /**
@@ -63,10 +70,17 @@ public class CodeGenerator
             method = theClass.getDeclaredMethod(nameMethod, new Class[]{});
         }
         catch(Exception e){
-            code.append("    /**GET Method Propertie " +field.getName()+"*/\n");
+            String docLanguage = bluej.getExtensionPropertyString("doc_language", "German");
+            String documentation = "";
+            if (docLanguage.equals("German"))
+                documentation = "Getter-Methode fuer: ";
+            else if (docLanguage.equals("English"))
+                documentation = "Getter method for: ";
+            code.append("\n");
+            code.append("    /**\n * " + docLanguage + field.getName() + "\n*/\n");
             code.append("    public "+nameType+ " " + nameMethod+"(){\n");
-            code.append("        return this."+field.getName()+";\n");
-            code.append("    }//end method "+nameMethod+"\n\n");
+            code.append("        return "+field.getName()+";\n");
+            code.append("    }\n\n");
         }//end catch not found getter
         return code.toString();
     }//end generateGetter
@@ -109,7 +123,7 @@ public class CodeGenerator
     /**
      * Generate SET methods of theClass and field
      * @param theClass the java.lang.reflect Class
-     * @param field the java.lang.reflect Filed
+     * @param field the java.lang.reflect Field
      * @return source code SET method to theClass and field
      * 
      */
@@ -128,10 +142,12 @@ public class CodeGenerator
             method = theClass.getDeclaredMethod(nameMethod, new Class[]{field.getType()});
         }
         catch(Exception e){
-            code.append("    /**SET Method Propertie " + field.getName()+"*/\n");
-            code.append("    public void"+ " " + nameMethod+"("+nameType+" "+ field.getName() +"){\n");
-            code.append("        this."+field.getName()+" = " + field.getName() +";\n");
-            code.append("    }//end method "+nameMethod+"\n\n");
+            String paramNameSuffix = bluej.getExtensionPropertyString("param_name_suffix", "Neu");
+            code.append("\n");
+            code.append("    /**\n * Setter Method for: " + field.getName()+"\n *\n * @param "+ field.getName() + paramNameSuffix + " New value for attribute "+field.getName()+"\n */\n");
+            code.append("    public void"+ " " + nameMethod+"("+nameType+" "+ field.getName() + paramNameSuffix + "){\n");
+            code.append("        "+field.getName()+" = " + field.getName() + paramNameSuffix + ";\n");
+            code.append("    }\n\n");
         }//end catch not found setter
         return code.toString();
     }//end generateSetter   

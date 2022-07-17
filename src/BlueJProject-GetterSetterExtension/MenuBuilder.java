@@ -68,7 +68,7 @@ class MenuBuilder extends MenuGenerator {
 
             }
             else{
-              jm.getItems().addAll(jm0, new MenuItem("(Class No compiled...)"));
+              jm.getItems().addAll(jm0, new MenuItem("(Compile class first...)"));
             }
         }catch(Exception e){
             GetterSetterExtension.showError(e); 
@@ -199,6 +199,9 @@ class MenuBuilder extends MenuGenerator {
                 text      +=  "Universidad Francisco de Paula Santander\n";
                 text      +=  "Cúcuta-Colombia\n";
                 text      +=  "miltonjesusvc@ufps.edu.co - miljeveco@gmail.com\n";
+                text += "forked and edited by: Christopher Wagner\n";
+                text += "Klenze Gymnasium, Munich, Germany\n";
+                text += "christopher.wagner@klg.muenchen.musin.de\n";
                 Alert alert = new Alert(Alert.AlertType.NONE, text, ButtonType.OK);
                 alert.initStyle(StageStyle.UTILITY);
                 alert.showAndWait();
@@ -209,4 +212,4 @@ class MenuBuilder extends MenuGenerator {
         }
     }
 
-}//fin clase
+}

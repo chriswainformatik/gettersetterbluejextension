@@ -58,10 +58,10 @@ public class EditorUtil
             currentText = currentText.substring(0, lastCurlyBraces - 1);
 
             newText = currentText + 
-            "\n\n//Start GetterSetterExtension Source Code\n\n" + 
+            //"\n\n//Start GetterSetterExtension Source Code\n\n" +
             appendText + 
-            "//End GetterSetterExtension Source Code\n\n" + 
-            "\n}//End class";
+            //"//End GetterSetterExtension Source Code\n\n" +
+            "\n}";
 
             editor.setText(myBegin, myEnd, newText.toString());
         }catch(Exception e){
