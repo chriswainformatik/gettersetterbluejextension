@@ -81,10 +81,11 @@ public class CodeGenerator
             else if (docLanguage.equals("English"))
                 documentation = "Getter method for: ";
             code.append("\n");
-            code.append("    /**\n     * " + documentation + field.getName() + "\n    */\n");
+            if (bluej.getExtensionPropertyString("include_documentation", "false").equals("true"))
+                code.append("    /**\n     * " + documentation + field.getName() + "\n    */\n");
             code.append("    public "+nameType+ " " + nameMethod+"(){\n");
             code.append("        return "+field.getName()+";\n");
-            code.append("    }\n\n");
+            code.append("    }\n");
         }//end catch not found getter
         return code.toString();
     }//end generateGetter
@@ -162,10 +163,11 @@ public class CodeGenerator
                 documentation2 = "The new value for ";
             }
             code.append("\n");
-            code.append("    /**\n     * " + documentation + field.getName()+"\n     *\n     * @param "+ field.getName() + paramNameSuffix + " " + documentation2 + field.getName()+"\n     */\n");
+            if (bluej.getExtensionPropertyString("include_documentation", "false").equals("true"))
+                code.append("    /**\n     * " + documentation + field.getName()+"\n     *\n     * @param "+ field.getName() + paramNameSuffix + " " + documentation2 + field.getName()+"\n     */\n");
             code.append("    public void"+ " " + nameMethod+"("+nameType+" "+ field.getName() + paramNameSuffix + "){\n");
             code.append("        "+field.getName()+" = " + field.getName() + paramNameSuffix + ";\n");
-            code.append("    }\n\n");
+            code.append("    }\n");
         }//end catch not found setter
         return code.toString();
     }//end generateSetter   

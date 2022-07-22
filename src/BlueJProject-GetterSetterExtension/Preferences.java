@@ -2,6 +2,7 @@ import bluej.extensions2.BlueJ;
 import bluej.extensions2.PreferenceGenerator;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -18,10 +19,12 @@ class Preferences implements PreferenceGenerator
     private TextField paramNameTextfield;
     private ComboBox docLanguageCombobox;
     private ComboBox methodLanguageCombobox;
+    private CheckBox includeDocumentationCheckBox;
     private BlueJ bluej;
     public static final String PROFILE_LABEL = "param_name_suffix";
     public static final String PROFILE_LABEL2 = "doc_language";
     public static final String PROFILE_LABEL3 = "method_language";
+    public static final String PROFILE_LABEL4 = "include_documentation";
 
     // Construct the panel, and initialise it from any stored values
     public Preferences(BlueJ bluej)
@@ -41,6 +44,17 @@ class Preferences implements PreferenceGenerator
         hboxContainer.setPadding(new Insets(5, 0, 5, 0));
         hboxContainer.setAlignment(Pos.CENTER_LEFT);
         vboxContainer.getChildren().add(hboxContainer);
+
+        HBox hboxContainer4 = new HBox();
+        Label docIncludeLabel = new Label("Include method documentation: ");
+        docIncludeLabel.setPadding(new Insets(0, 15, 0, 0));
+        includeDocumentationCheckBox = new CheckBox();
+        includeDocumentationCheckBox.setSelected(false);
+        hboxContainer4.getChildren().add(docIncludeLabel);
+        hboxContainer4.getChildren().add(includeDocumentationCheckBox);
+        hboxContainer4.setPadding(new Insets(5, 0, 5, 0));
+        hboxContainer4.setAlignment(Pos.CENTER_LEFT);
+        vboxContainer.getChildren().add(hboxContainer4);
 
         HBox hboxContainer2 = new HBox();
         Label docLanguageLabel = new Label("Language of documentation text: ");
@@ -83,15 +97,16 @@ class Preferences implements PreferenceGenerator
         // Save the preference value in the BlueJ properties file
         bluej.setExtensionPropertyString(PROFILE_LABEL, paramNameTextfield.getText());
         bluej.setExtensionPropertyString(PROFILE_LABEL2, docLanguageCombobox.getValue().toString());
-        bluej.setExtensionPropertyString(PROFILE_LABEL2, methodLanguageCombobox.getValue().toString());
+        bluej.setExtensionPropertyString(PROFILE_LABEL3, methodLanguageCombobox.getValue().toString());
+        bluej.setExtensionPropertyString(PROFILE_LABEL4, includeDocumentationCheckBox.isSelected()+"");
     }
 
     public void loadValues()
     {
-        // Load the property value from the BlueJ properties file,
-        // default to "Neu"
+        // Load the property value from the BlueJ properties file
         paramNameTextfield.setText(bluej.getExtensionPropertyString(PROFILE_LABEL, "Neu"));
         docLanguageCombobox.setValue(bluej.getExtensionPropertyString(PROFILE_LABEL2, "German"));
         methodLanguageCombobox.setValue(bluej.getExtensionPropertyString(PROFILE_LABEL2, "German"));
+        includeDocumentationCheckBox.setSelected(bluej.getExtensionPropertyString(PROFILE_LABEL4, "false").equals("false") ? false : true);
     }
 }
