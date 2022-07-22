@@ -21,8 +21,8 @@ import javafx.stage.Modality;
  * 2) Generate source code of GET method of one propertie
  * 3) Generate source code of SET method of one propertie
  * 4) Generate GUI JavaFX to view/edit object's properties with GET/SET methods
- * 
- * @author (Milton Jes&uacute;s Vera Contreras - miltonjesusvc@ufps.edu.co) 
+ *
+ * @author (Milton Jes&uacute;s Vera Contreras - miltonjesusvc@ufps.edu.co)
  * @version 0.0000000000000001 --> Math.sin(Math.PI-Double.MIN_VALUE) --> :)
  */
 public class GetterSetterExtension extends Extension
@@ -45,25 +45,25 @@ public class GetterSetterExtension extends Extension
     }
 
     /**
-     * This method must decide if this Extension is compatible with the 
+     * This method must decide if this Extension is compatible with the
      * current release of the BlueJ Extensions API
      */
-    public boolean isCompatible () { 
-        return true; 
+    public boolean isCompatible () {
+        return true;
     }
 
     /**
      * Returns the version number of this extension
      */
-    public String  getVersion () { 
-        return ("0.0000000000000001 --> Math.sin(Math.PI-Double.MIN_VALUE) --> :)");  
+    public String  getVersion () {
+        return ("0.0000000000000001 --> Math.sin(Math.PI-Double.MIN_VALUE) --> :)");
     }
 
     /**
      * Returns the user-visible name of this extension
      */
-    public String  getName () { 
-        return ("GetterSetter Extension");  
+    public String  getName () {
+        return ("GetterSetter Extension");
     }
 
     /**
@@ -131,7 +131,7 @@ public class GetterSetterExtension extends Extension
 
     /**
      * Generate source code of GET/SET methods of all class's properties
-     */ 
+     */
     public void genGetterSetter() throws Exception {
         EditorUtil editorUtil;
         CodeGenerator codeGenerator = null;
@@ -169,7 +169,7 @@ public class GetterSetterExtension extends Extension
         code = codeGenerator.generateSetter(this.curClass.getJavaClass(), propertie);
         editorUtil.appendText(code);
         curClass.compile(false);
-    }//fin genSetter    
+    }//fin genSetter
 
     /**
      * Generate GUI JavaFX to view/edit object's properties with GET/SET methods
@@ -184,9 +184,9 @@ public class GetterSetterExtension extends Extension
 
         scene.getStylesheets().add(getClass().getResource("gettersetter.css").toExternalForm());
 
-        stage.setScene(scene); 
+        stage.setScene(scene);
         stage.setTitle("GetterSetter");
-        stage.sizeToScene(); 
+        stage.sizeToScene();
         stage.setResizable(false);
         stage.centerOnScreen();
         stage.initModality(Modality.WINDOW_MODAL);

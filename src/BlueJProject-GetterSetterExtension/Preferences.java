@@ -17,9 +17,11 @@ class Preferences implements PreferenceGenerator
     private Pane myPane;
     private TextField paramNameTextfield;
     private ComboBox docLanguageCombobox;
+    private ComboBox methodLanguageCombobox;
     private BlueJ bluej;
     public static final String PROFILE_LABEL = "param_name_suffix";
     public static final String PROFILE_LABEL2 = "doc_language";
+    public static final String PROFILE_LABEL3 = "method_language";
 
     // Construct the panel, and initialise it from any stored values
     public Preferences(BlueJ bluej)
@@ -53,6 +55,19 @@ class Preferences implements PreferenceGenerator
         hboxContainer2.setAlignment(Pos.CENTER_LEFT);
         vboxContainer.getChildren().add(hboxContainer2);
 
+        HBox hboxContainer3 = new HBox();
+        Label methodLanguageLabel = new Label("Language of method name: ");
+        methodLanguageLabel.setPadding(new Insets(0, 15, 0, 0));
+        methodLanguageCombobox = new ComboBox();
+        methodLanguageCombobox.getItems().add("German");
+        methodLanguageCombobox.getItems().add("English");
+        methodLanguageCombobox.setValue("German");
+        hboxContainer3.getChildren().add(methodLanguageLabel);
+        hboxContainer3.getChildren().add(methodLanguageCombobox);
+        hboxContainer3.setPadding(new Insets(5, 0, 5, 0));
+        hboxContainer3.setAlignment(Pos.CENTER_LEFT);
+        vboxContainer.getChildren().add(hboxContainer3);
+
         myPane.getChildren().add(vboxContainer);
         // Load the default value
         loadValues();
@@ -68,6 +83,7 @@ class Preferences implements PreferenceGenerator
         // Save the preference value in the BlueJ properties file
         bluej.setExtensionPropertyString(PROFILE_LABEL, paramNameTextfield.getText());
         bluej.setExtensionPropertyString(PROFILE_LABEL2, docLanguageCombobox.getValue().toString());
+        bluej.setExtensionPropertyString(PROFILE_LABEL2, methodLanguageCombobox.getValue().toString());
     }
 
     public void loadValues()
@@ -76,5 +92,6 @@ class Preferences implements PreferenceGenerator
         // default to "Neu"
         paramNameTextfield.setText(bluej.getExtensionPropertyString(PROFILE_LABEL, "Neu"));
         docLanguageCombobox.setValue(bluej.getExtensionPropertyString(PROFILE_LABEL2, "German"));
+        methodLanguageCombobox.setValue(bluej.getExtensionPropertyString(PROFILE_LABEL2, "German"));
     }
 }

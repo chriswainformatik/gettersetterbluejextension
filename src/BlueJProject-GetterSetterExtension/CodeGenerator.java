@@ -61,7 +61,11 @@ public class CodeGenerator
         StringBuffer code = new StringBuffer();
         String nameField=null, nameMethod=null, nameType=null;
         nameField = field.getName().substring(0,1).toUpperCase() + (field.getName().length() > 1 ? field.getName().substring(1):"");
-        nameMethod = "get"+nameField;
+        String methodLanguage = bluej.getExtensionPropertyString("method_language", "German");
+        if (methodLanguage.equals("German"))
+            nameMethod = nameField+"Geben";
+        else if (methodLanguage.equals("English"))
+            nameMethod = "get"+nameField;
         if(field.getGenericType() instanceof ParameterizedType)
             nameType = field.getGenericType().toString();
         else
@@ -77,7 +81,7 @@ public class CodeGenerator
             else if (docLanguage.equals("English"))
                 documentation = "Getter method for: ";
             code.append("\n");
-            code.append("    /**\n * " + docLanguage + field.getName() + "\n*/\n");
+            code.append("    /**\n     * " + documentation + field.getName() + "\n    */\n");
             code.append("    public "+nameType+ " " + nameMethod+"(){\n");
             code.append("        return "+field.getName()+";\n");
             code.append("    }\n\n");
@@ -133,7 +137,11 @@ public class CodeGenerator
         StringBuffer code = new StringBuffer();
         String nameField=null, nameMethod=null, nameType=null;
         nameField = field.getName().substring(0,1).toUpperCase() + (field.getName().length() > 1 ? field.getName().substring(1):"");
-        nameMethod = "set"+nameField;
+        String methodLanguage = bluej.getExtensionPropertyString("method_language", "German");
+        if (methodLanguage.equals("German"))
+            nameMethod = nameField+"Setzen";
+        else if (methodLanguage.equals("English"))
+            nameMethod = "set"+nameField;
         if(field.getGenericType() instanceof ParameterizedType)
             nameType = field.getGenericType().toString();
         else
@@ -143,8 +151,18 @@ public class CodeGenerator
         }
         catch(Exception e){
             String paramNameSuffix = bluej.getExtensionPropertyString("param_name_suffix", "Neu");
+            String docLanguage = bluej.getExtensionPropertyString("doc_language", "German");
+            String documentation = "";
+            String documentation2 = "";
+            if (docLanguage.equals("German")) {
+                documentation = "Setter-Methode fuer: ";
+                documentation2 = "Der neue Wert fuer das Attribut ";
+            } else if (docLanguage.equals("English")) {
+                documentation = "Setter method for: ";
+                documentation2 = "The new value for ";
+            }
             code.append("\n");
-            code.append("    /**\n * Setter Method for: " + field.getName()+"\n *\n * @param "+ field.getName() + paramNameSuffix + " New value for attribute "+field.getName()+"\n */\n");
+            code.append("    /**\n     * " + documentation + field.getName()+"\n     *\n     * @param "+ field.getName() + paramNameSuffix + " " + documentation2 + field.getName()+"\n     */\n");
             code.append("    public void"+ " " + nameMethod+"("+nameType+" "+ field.getName() + paramNameSuffix + "){\n");
             code.append("        "+field.getName()+" = " + field.getName() + paramNameSuffix + ";\n");
             code.append("    }\n\n");
